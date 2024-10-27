@@ -17,17 +17,21 @@ namespace RimeFramework.Core
     /// <remarks>Author: AstoraGray</remarks>
     public class Consoles : Singleton<Consoles>
     {
-        private static readonly Dictionary<Type, Color> colorMapping = new()
+        private static readonly Dictionary<Type, Color> _dicMapping = new()
         {
-            { typeof(RimeManager), Color.green }
+            { typeof(RimeManager), Color.cyan },
+            { typeof(States), Color.cyan },
+            { typeof(Controls), Color.cyan },
+            { typeof(Cycles), Color.cyan },
+            { typeof(Pools), Color.cyan }
         };
         
         public static void Print(Type type,string content)
         {
             string typeName = type.ToString().Split('.').Last();
-            if (colorMapping.ContainsKey(type))
+            if (_dicMapping.ContainsKey(type))
             {
-                typeName = $"<color={colorMapping[type].ToHex()}>{typeName}</color>";
+                typeName = $"<color={_dicMapping[type].ToHex()}>{typeName}</color>";
             }
             Debug.Log($"{typeName}: {content}");
         }

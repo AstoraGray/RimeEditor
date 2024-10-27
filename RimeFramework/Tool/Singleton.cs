@@ -6,6 +6,7 @@ namespace RimeFramework.Tool
     /// 单例类
     /// </summary>
     /// <typeparam name="T">类型</typeparam>
+    /// <remarks>Author: AstoraGray</remarks>
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         private static T _instance;

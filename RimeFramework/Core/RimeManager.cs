@@ -6,6 +6,7 @@ namespace RimeFramework.Core
     /// <summary>
     /// 最上层，游戏管理器
     /// </summary>
+    /// <remarks>Author: AstoraGray</remarks>
     public class RimeManager : Singleton<RimeManager>
     {
         public bool consoles = true;
