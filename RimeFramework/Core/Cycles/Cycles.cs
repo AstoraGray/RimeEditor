@@ -42,12 +42,12 @@ namespace RimeFramework.Core
             [CanBeNull] public IOnDestroy onDestroy;
         }
 
-        public static T Register<T>(GameObject obj) where T : class, new()
+        public static T Register<T>(GameObject obj) where T : class,IBind, new()
         {
              return Register(Pools.OnTake<T>(),obj);
         }
         
-        private static T Register<T>(T own,GameObject obj) where T : class, new()
+        private static T Register<T>(T own,GameObject obj) where T : class,IBind, new()
         {
             if (own as MonoBehaviour != null)
             {
@@ -104,7 +104,7 @@ namespace RimeFramework.Core
             return own;
         }
 
-        public static bool UnRegister<T>(T own) where T : class, new()
+        public static bool UnRegister<T>(T own) where T : class,IBind, new()
         {
             if (own == null)
             {
