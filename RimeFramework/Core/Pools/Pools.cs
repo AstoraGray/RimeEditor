@@ -140,7 +140,7 @@ namespace RimeFramework.Core
             int clearCount = 0;
             foreach (var key in _dicDrips.Keys.ToList())
             {
-                if (key.IsSubclassOf(typeof(T)))
+                if (key == typeof(T) || key.IsSubclassOf(typeof(T)))
                 {
                     ClearMono<T>(key);
                     clearCount++;

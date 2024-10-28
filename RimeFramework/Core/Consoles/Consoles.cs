@@ -23,7 +23,8 @@ namespace RimeFramework.Core
             { typeof(States), Color.cyan },
             { typeof(Controls), Color.cyan },
             { typeof(Cycles), Color.cyan },
-            { typeof(Pools), Color.cyan }
+            { typeof(Pools), Color.cyan },
+            {typeof(Navigations),Color.cyan}
         };
         
         public static void Print(Type type,string content)
