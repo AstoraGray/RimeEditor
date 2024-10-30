@@ -15,6 +15,8 @@ namespace RimeFramework.Core
         public bool cycles = true;
         public bool pools = true;
         public bool navigations = true;
+        public bool scenes = true;
+        public bool animators = true;
         protected override void Awake()
         {
             base.Awake();
@@ -30,6 +32,8 @@ namespace RimeFramework.Core
             if(cycles) Cycles.Instance.transform.SetParent(transform);
             if(pools) Pools.Instance.transform.SetParent(transform);
             if(navigations) Navigations.Instance.transform.SetParent(transform);
+            if(scenes) Scenes.Instance.transform.SetParent(transform);
+            if(animators) Animators.Instance.transform.SetParent(transform);
         }
     }
 }

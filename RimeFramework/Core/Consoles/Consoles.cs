@@ -24,7 +24,9 @@ namespace RimeFramework.Core
             { typeof(Controls), Color.cyan },
             { typeof(Cycles), Color.cyan },
             { typeof(Pools), Color.cyan },
-            {typeof(Navigations),Color.cyan}
+            { typeof(Navigations),Color.cyan},
+            { typeof(Scenes), Color.cyan },
+            { typeof(Animators),Color.cyan}
         };
         
         public static void Print(Type type,string content)
