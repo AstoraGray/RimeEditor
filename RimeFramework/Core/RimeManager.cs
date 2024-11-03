@@ -17,6 +17,7 @@ namespace RimeFramework.Core
         public bool navigations = true;
         public bool scenes = true;
         public bool animators = true;
+        public bool audios = true;
         protected override void Awake()
         {
             base.Awake();
@@ -34,6 +35,7 @@ namespace RimeFramework.Core
             if(navigations) Navigations.Instance.transform.SetParent(transform);
             if(scenes) Scenes.Instance.transform.SetParent(transform);
             if(animators) Animators.Instance.transform.SetParent(transform);
+            if(audios) Audios.Instance.transform.SetParent(transform);
         }
     }
 }

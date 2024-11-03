@@ -3,9 +3,9 @@ using RimeFramework.Tool;
 namespace RimeFramework.Core
 {
     /// <summary>
-    /// 霜 · 导航组 ➡️
+    /// 霜 · 声音 🔊
     /// </summary>
-    public class Navigations : Singleton<Navigations>
+    public class Audios : Singleton<Audios>
     {
         
     }

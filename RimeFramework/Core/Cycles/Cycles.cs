@@ -15,14 +15,16 @@ namespace RimeFramework.Core
     /// <remarks>Author: AstoraGray</remarks>
     public class Cycles : Singleton<Cycles>
     {
-        private static readonly Dictionary<string,Cell> _dicCells = new ();
+        private static readonly Dictionary<string,Cell> _dicCells = new (); // 工作的细胞们
 
-        private static readonly Dictionary<string, Cell> _dicCellsReady = new();
+        private static readonly Dictionary<string, Cell> _dicCellsReady = new(); // 就绪的细胞们
 
-        private static readonly Queue<string> _queueRecycle = new ();
+        private static readonly Queue<string> _queueRecycle = new (); // 要回收的细胞列表
         
-        private static readonly Queue<string> _queueRecycleReady = new ();
-
+        private static readonly Queue<string> _queueRecycleReady = new (); // 准备回收的细胞列表
+        /// <summary>
+        /// 细胞（ps：就像细胞一般的周期）
+        /// </summary>
         private struct Cell
         {
             [CanBeNull] public IAwake awake;
@@ -41,12 +43,23 @@ namespace RimeFramework.Core
 
             [CanBeNull] public IOnDestroy onDestroy;
         }
-
+        /// <summary>
+        /// 注册周期
+        /// </summary>
+        /// <param name="obj">绑定目标</param>
+        /// <typeparam name="T">周期类类型</typeparam>
+        /// <returns></returns>
         public static T Register<T>(GameObject obj) where T : class,IBind, new()
         {
              return Register(Pools.OnTake<T>(),obj);
         }
-        
+        /// <summary>
+        /// 注册周期
+        /// </summary>
+        /// <param name="own">自身实例</param>
+        /// <param name="obj">绑定目标</param>
+        /// <typeparam name="T">周期类类型</typeparam>
+        /// <returns></returns>
         private static T Register<T>(T own,GameObject obj) where T : class,IBind, new()
         {
             if (own as MonoBehaviour != null)
@@ -103,7 +116,12 @@ namespace RimeFramework.Core
 
             return own;
         }
-
+        /// <summary>
+        /// 注销周期
+        /// </summary>
+        /// <param name="own">自身实例</param>
+        /// <typeparam name="T">周期类类型</typeparam>
+        /// <returns></returns>
         public static bool UnRegister<T>(T own) where T : class,IBind, new()
         {
             if (own == null)
@@ -128,7 +146,9 @@ namespace RimeFramework.Core
 
             return false;
         }
-
+        /// <summary>
+        /// Unity - Update()
+        /// </summary>
         private void Update()
         {
             Recycle();
@@ -138,7 +158,9 @@ namespace RimeFramework.Core
                 dicCell.Value.update?.Update();
             }
         }
-
+        /// <summary>
+        /// Unity - FixedUpdate()
+        /// </summary>
         private void FixedUpdate()
         {
             Recycle();
@@ -148,7 +170,9 @@ namespace RimeFramework.Core
                 dicCell.Value.fixedUpdate?.FixedUpdate();
             }
         }
-
+        /// <summary>
+        /// Unity - LateUpdate()
+        /// </summary>
         private void LateUpdate()
         {
             Recycle();
@@ -165,7 +189,9 @@ namespace RimeFramework.Core
             
             _dicCellsReady.Clear();
         }
-
+        /// <summary>
+        /// 回收函数
+        /// </summary>
         private void Recycle()
         {
             while (_queueRecycle.Count > 0)

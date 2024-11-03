@@ -18,8 +18,6 @@ namespace RimeFramework.Core
         
         private static readonly Dictionary<Animator, Coroutine> _dicPlays = new (); // 播放组
 
-        private const string GROUP = "group|"; // 烙印
-
         /// <summary>
         /// 注册组
         /// </summary>
@@ -27,7 +25,7 @@ namespace RimeFramework.Core
         /// <param name="animations">序列动画名</param>
         public static void Register(string groupName,params string[] animations)
         {
-            _dicGroups[$"{GROUP}{groupName}"] = animations;
+            _dicGroups[groupName] = animations;
         }
 
         /// <summary>
@@ -36,16 +34,16 @@ namespace RimeFramework.Core
         /// <param name="animator">动画</param>
         /// <param name="name">动画组名 / 动画名</param>
         /// <param name="fadeTime"> 渐变时间</param>
-        /// <param name="cbDone">成功回调</param>
-        /// <param name="cbFail">失败回调</param>
-        public static void Play(Animator animator,string name,float fadeTime = 0.3f,Action cbDone = null,Action cbFail = null)
+        /// <param name="onComplete">成功回调</param>
+        /// <param name="onCancel">失败回调</param>
+        public static void Play(Animator animator,string name,float fadeTime = 0.3f,Action onComplete = null,Action onCancel = null)
         {
-            if (!_dicGroups.TryGetValue($"{GROUP}{name}", out string[] animations))
+            if (!_dicGroups.TryGetValue(name, out string[] animations))
             {
-                _dicPlays[animator] = Instance.StartCoroutine(Playing(animator,name,fadeTime, cbDone, cbFail));
+                _dicPlays[animator] = Instance.StartCoroutine(Playing(animator,name,fadeTime, onComplete, onCancel));
                 return;
             }
-            Play(animator,animations,fadeTime,cbDone,cbFail);
+            Play(animator,animations,fadeTime,onComplete,onCancel);
         }
         /// <summary>
         /// 播放动画组
@@ -53,21 +51,21 @@ namespace RimeFramework.Core
         /// <param name="animator">动画</param>
         /// <param name="animations">动画序列</param>
         /// <param name="fadeTime">渐变时间</param>
-        /// <param name="cbDone">成功回调</param>
-        /// <param name="cbFail">失败回调</param>
-        private static void Play(Animator animator,string[] animations,float fadeTime = 0.3f,Action cbDone = null,Action cbFail = null)
+        /// <param name="onComplete">成功回调</param>
+        /// <param name="onCancel">失败回调</param>
+        private static void Play(Animator animator,string[] animations,float fadeTime = 0.3f,Action onComplete = null,Action onCancel = null)
         {
             _dicPlays[animator] = Instance.StartCoroutine(Playing(animator,animations[0], fadeTime, () =>
             {
                 if (animations.Length == 1)
                 {
-                    cbDone?.Invoke();
+                    onComplete?.Invoke();
                     return;
                 }
 
                 animations = animations.Skip(1).ToArray();
-                Play(animator,animations,fadeTime,cbDone,cbFail);
-            },cbFail));
+                Play(animator,animations,fadeTime,onComplete,onCancel);
+            },onCancel));
         }
         /// <summary>
         /// 播放协程
@@ -75,10 +73,10 @@ namespace RimeFramework.Core
         /// <param name="animator">动画</param>
         /// <param name="animations">动画序列</param>
         /// <param name="fadeTime">渐变时间</param>
-        /// <param name="cbDone">成功回调</param>
-        /// <param name="cbFail">失败回调</param>
+        /// <param name="onComplete">成功回调</param>
+        /// <param name="onCancel">失败回调</param>
         /// <returns></returns>
-        private static IEnumerator Playing(Animator animator,string name,float fadeTime,Action cbDone,Action cbFail)
+        private static IEnumerator Playing(Animator animator,string name,float fadeTime,Action onComplete,Action onCancel)
         {
             yield return null;
             Coroutine coroutine = _dicPlays[animator];
@@ -89,12 +87,12 @@ namespace RimeFramework.Core
             {
                 if (_dicPlays[animator] != coroutine)
                 {
-                    cbFail?.Invoke();
+                    onCancel?.Invoke();
                     yield break;
                 }
                 yield return Time.deltaTime;
             }
-            cbDone?.Invoke();
+            onComplete?.Invoke();
             if (_dicPlays[animator] == coroutine)
             {
                 _dicPlays[animator] = null;
