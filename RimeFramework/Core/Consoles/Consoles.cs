@@ -31,7 +31,7 @@ namespace RimeFramework.Core
         
         public static void Print(Type type,string content)
         {
-            string typeName = type.ToString().Split('.').Last();
+            string typeName = type.Name;
             if (_dicMapping.ContainsKey(type))
             {
                 typeName = $"<color={_dicMapping[type].ToHex()}>{typeName}</color>";
@@ -41,7 +41,16 @@ namespace RimeFramework.Core
 
         public static void Print(Object obj, string content)
         {
-            string objName = obj.ToString().Split('.').Last();
+            string objName;
+            MonoBehaviour own = obj as MonoBehaviour;
+            if (own != null)
+            {
+                objName = own.name;
+            }
+            else
+            {
+                objName = obj.GetType().Name;
+            }
             Debug.Log($"{objName}: {content}");
         }
     }

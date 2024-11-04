@@ -32,7 +32,7 @@ namespace RimeFramework.Tool
                     _instance = FindObjectOfType<T>();
                     if (_instance == null)
                     {
-                        _instance = new GameObject(typeof(T).ToString()).AddComponent<T>();
+                        _instance = new GameObject(typeof(T).Name).AddComponent<T>();
                     }
                 }
                 return _instance;

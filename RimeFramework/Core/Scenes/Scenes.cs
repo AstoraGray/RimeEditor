@@ -18,7 +18,13 @@ namespace RimeFramework.Core
         private static readonly List<string> _scenes = new (); // 已加载场景
         
         private static readonly Dictionary<string,Coroutine> _dicCoroutines = new (); // 进行中协程
-        
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _scenes.Add(SceneManager.GetActiveScene().name);
+        }
+
         /// <summary>
         /// 加载场景
         /// </summary>
@@ -37,6 +43,7 @@ namespace RimeFramework.Core
             {
                 _scenes.Clear();
             }
+            Consoles.Print(typeof(Scenes),$"正在加载场景 {name}");
             _scenes.Add(name);
             
             _dicCoroutines[name] = Instance.StartCoroutine(Loading(name,mode,onUpdate,onComplete));
@@ -49,19 +56,23 @@ namespace RimeFramework.Core
         /// <param name="onComplete">完成回调</param>
         public static void Unload(string name = null,Action<float> onUpdate = null,Action onComplete = null)
         {
-            if (!_scenes.Contains(name))
+            if (_scenes.Count == 1)
             {
-                Consoles.Print(typeof(Scenes),$"场景列表中不包含场景 {name}，不可卸载");
+                Consoles.Print(typeof(Scenes), "唯一场景，不可卸载");
                 return;
             }
             if (name == null)
             {
                 name = _scenes.Last();
-                _scenes.RemoveAt(_scenes.Count - 1);
+            }
+            if (_scenes.Remove(name))
+            {
+                Consoles.Print(typeof(Scenes),$"正在卸载场景{name}");
             }
             else
             {
-                _scenes.Remove(name);
+                Consoles.Print(typeof(Scenes), $"场景列表中不包含场景 {name}，不可卸载");
+                return;
             }
             _dicCoroutines[name] = Instance.StartCoroutine(Unloading(name, onUpdate, onComplete));
         }
@@ -83,6 +94,7 @@ namespace RimeFramework.Core
             {
                 if (_dicCoroutines[name] != coroutine)
                 {
+                    Consoles.Print(typeof(Scenes),$"加载场景 {name} 被取消");
                     yield break;
                 }
                 onUpdate?.Invoke(scene.progress);
@@ -93,7 +105,7 @@ namespace RimeFramework.Core
             {
                 _dicCoroutines[name] = null;
             }
-            
+            Consoles.Print(typeof(Scenes),$"成功加载场景 {name}");
             onComplete?.Invoke();
         }
         /// <summary>
@@ -113,6 +125,7 @@ namespace RimeFramework.Core
             {
                 if (_dicCoroutines[name] != coroutine)
                 {
+                    Consoles.Print(typeof(Scenes),$"卸载场景 {name} 被取消");
                     yield break;
                 }
                 onUpdate?.Invoke(scene.progress);
@@ -123,6 +136,7 @@ namespace RimeFramework.Core
             {
                 _dicCoroutines[name] = null;
             }
+            Consoles.Print(typeof(Scenes),$"成功卸载场景 {name}");
             onComplete?.Invoke();
         }
     }
