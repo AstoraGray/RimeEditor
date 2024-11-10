@@ -11,6 +11,12 @@ namespace RimeFramework.Core
     /// 霜 · 池 💧
     /// </summary>
     /// <b> Note: 存取所有堆类型数据，包括Mono派生类、以及提线木偶、纯GameObject
+    /// <see cref="Take<T>"/> 索取<T>类型的资源
+    /// <see cref="Take(string)"/> 索取某一名称的Obj
+    /// <see cref="Put<T>"/> 归放<T>类型的资源
+    /// <see cref="Put(string)"/> 归放某一名称的Obj
+    /// <see cref="Clear<T>"/> 销毁<T>名称的资源，支持里氏替换
+    /// <see cref="Clear(string)"/> 销毁某一名称的资源
     /// <remarks>Author: AstoraGray</remarks>
     public class Pools : Singleton<Pools>
     {
@@ -47,7 +53,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <typeparam name="T">水滴类型</typeparam>
         /// <returns>水滴实例</returns>
-        public static T OnTake<T>() where T : class,new ()
+        public static T Take<T>() where T : class,new ()
         {
             Type type = typeof(T);
             if (!_dicDrips.ContainsKey(type))
@@ -69,7 +75,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <param name="name">水滴名称</param>
         /// <returns>水滴实例 - 特化GameObject</returns>
-        public static GameObject OnTake(string name)
+        public static GameObject Take(string name)
         {
             if (!_dicObjDrips.ContainsKey(name))
             {
@@ -91,7 +97,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <param name="drip">水滴实例</param>
         /// <typeparam name="T">水滴类型</typeparam>
-        public static bool OnPut<T>(T drip) where T : class
+        public static bool Put<T>(T drip) where T : class
         {
             Type type = typeof(T);
             if (!_dicDrips.ContainsKey(type))
@@ -112,7 +118,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <param name="obj">水滴实例 - 特化GameObject</param>
         /// <returns></returns>
-        public static bool OnPut(GameObject obj)
+        public static bool Put(GameObject obj)
         {
             string name = obj.name.Extract(RIME);
             if (!_dicObjDrips.ContainsKey(name))
@@ -126,7 +132,7 @@ namespace RimeFramework.Core
             _dicObjOuterDrips[name].Remove(obj);
             queue.Enqueue(obj);
 
-            return OnPutObj(obj,name);
+            return PutObj(obj,name);
         }
 
         /// <summary>
@@ -134,7 +140,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <typeparam name="T">水滴类型</typeparam>
         /// <returns>是否成功</returns>
-        public static bool OnClear<T>() where T : class
+        public static bool Clear<T>() where T : class
         {
             Type type = typeof(T);
             int clearCount = 0;
@@ -160,7 +166,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <param name="name">水滴名字 - 特化GameObject</param>
         /// <returns></returns>
-        public static bool OnClear(string name)
+        public static bool Clear(string name)
         {
             if (!_dicObjDrips.ContainsKey(name))
             {
@@ -332,7 +338,7 @@ namespace RimeFramework.Core
         /// <param name="obj">Obj实例</param>
         /// <param name="name">Obj名字</param>
         /// <returns></returns>
-        private static bool OnPutObj(GameObject obj, string name)
+        private static bool PutObj(GameObject obj, string name)
         {
             if (obj.transform.parent != _dicObjWells[name].transform)
             {
@@ -369,8 +375,8 @@ namespace RimeFramework.Core
                 }
             }
 
-            _dicOuterDrips[type] = null;
-            _dicDrips[type] = null;
+            _dicOuterDrips.Remove(type);
+            _dicDrips.Remove(type);
             
             if (!_dicWells.ContainsKey(type))
             {
@@ -378,7 +384,7 @@ namespace RimeFramework.Core
             }
             _queueDestroy.Enqueue(null);
             _queueDestroy.Enqueue(_dicWells[type]);
-            _dicWells[type] = null;
+            _dicWells.Remove(type);
             return true;
         }
         
@@ -394,12 +400,12 @@ namespace RimeFramework.Core
             
             foreach (var outerObjDrip in hashsetOuterDrips.ToList())
             {
-                OnPut(outerObjDrip);
+                Put(outerObjDrip);
             }
 
             _queueDestroy.Enqueue(null);
             _queueDestroy.Enqueue(_dicObjWells[name]);
-            _dicObjWells[name] = null;
+            _dicObjWells.Remove(name);
             return true;
         }
         /// <summary>

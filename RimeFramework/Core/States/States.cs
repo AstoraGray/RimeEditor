@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RimeFramework.Core
 {
     /// <summary>
-    /// 霜 · 状态机 📐
+    /// 霜 · 状态机 🗡️
     /// <b>Note: 为什么使用静态方法，但又是单例？
     /// 这样可以在融入Unity生命周期的同时，保持一些配置不受生命周期的影响，比如后续可以给States设置一些Awake()初始化方法</b>
     /// <see cref="Register(MonoBehaviour, enabled)"/> 注册状态

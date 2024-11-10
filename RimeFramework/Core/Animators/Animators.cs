@@ -11,6 +11,8 @@ namespace RimeFramework.Core
     /// 霜 · 动画师 ✍️
     /// </summary>
     /// <b> Note: 注册播放动画以及动画组、支持成功失败回调，可以脱离Animator连线
+    /// <see cref="Register(string,params string[])"/>注册动画组
+    /// <see cref="Register(Animator,string)"/>播放动画
     /// <remarks>Author: AstoraGray</remarks>
     public class Animators : Singleton<Animators>
     {

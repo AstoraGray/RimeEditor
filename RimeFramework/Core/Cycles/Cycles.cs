@@ -51,7 +51,7 @@ namespace RimeFramework.Core
         /// <returns></returns>
         public static T Register<T>(GameObject obj) where T : class,IBind, new()
         {
-             return Register(Pools.OnTake<T>(),obj);
+             return Register(Pools.Take<T>(),obj);
         }
         /// <summary>
         /// 注册周期
@@ -135,13 +135,13 @@ namespace RimeFramework.Core
             if (_dicCells.ContainsKey(key))
             {
                 _queueRecycle.Enqueue(key);
-                return Pools.OnPut(own);
+                return Pools.Put(own);
             }
 
             if (_dicCellsReady.ContainsKey(key))
             {
                 _queueRecycleReady.Enqueue(key);
-                return Pools.OnPut(own);;
+                return Pools.Put(own);;
             }
 
             return false;

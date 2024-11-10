@@ -11,7 +11,9 @@ namespace RimeFramework.Core
     /// <summary>
     /// 霜 · 布景员 🎬
     /// </summary>
-    /// <b> Note: 负责加载和卸载场景，支持完成回调、取消回调
+    /// <b> Note: 负责异步加载和卸载场景，支持完成回调、取消回调
+    /// <see cref="Load(string,LoadSceneMode)"/>加载场景
+    /// <see cref="Load(string,LoadSceneMode)"/>卸载场景
     /// <remarks>Author: AstoraGray</remarks>
     public class Scenes : Singleton<Scenes>
     {
