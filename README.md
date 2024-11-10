@@ -1,7 +1,7 @@
 # Rime Framework
 「Rime Framework」很轻，就像雾凇上的白霜一般，覆之于上，将其包裹着的物体装饰的冰洁、神圣。
 
-「Rime Framework」是Unity的一个超轻量级框架，目的是提供简洁的接口，使用起来不会破坏原代码的结构，就像没有一样。目前目前主要有五个模块：Consoles、Controls、States、Cycles、Pools。RimeManager负责启动模块。
+「Rime Framework」是Unity的一个超轻量级框架，目的是提供简洁的接口，使用起来不会破坏原代码的结构，就像没有一样。目前目前主要有八个模块：Consoles、Controls、States、Pools、Cycles、Animators、Scenes、Navigations。RimeManager负责启动模块。
 
 Consoles 💻
 
@@ -43,7 +43,7 @@ Audios 🔊
 
 The "Rime Framework" is lightweight, akin to the white frost on rime ice, enveloping objects in an ice-like purity and sanctity.
 
-The "Rime Framework" is an ultra-lightweight framework for Unity, designed to provide a concise interface that won't disrupt the original code structure—it's as if it's not even there. Currently, there are five main modules: Consoles, Controls, States, Cycles, and Pools. The RimeManager is responsible for launching these modules.
+The "Rime Framework" is an ultra-lightweight framework for Unity, designed to provide a concise interface that won't disrupt the original code structure—it's as if it's not even there. Currently, there are eight main modules: Consoles、Controls、States、Pools、Cycles、Animators、Scenes and Navigations. The RimeManager is responsible for launching these modules.
 
 **Consoles 💻**
 
