@@ -1,6 +1,8 @@
 # Rime Framework v0.0.1
 「Rime Framework」很轻，就像雾凇上的白霜一般，覆之于上，将其包裹着的物体装饰的冰洁、神圣。
 
+https://github.com/AstoraGray/Unity-RimeFramework
+
 「Rime Framework」是Unity的一个超轻量级框架，目的是提供简洁的接口，使用起来不会破坏原代码的结构，就像没有一样。目前目前主要有九个模块：Consoles、Controls、States、Pools、Cycles、Animators、Scenes、Navigations、Audios。RimeManager负责启动模块。
 
 Consoles 💻
@@ -42,6 +44,8 @@ Rime Framework的音效师，管理游戏中的所有声音，并且与Pools联�
 ------
 
 The "Rime Framework" is lightweight, like the white frost on rime ice, enveloping objects and adorning them with purity and sanctity.
+
+https://github.com/AstoraGray/Unity-RimeFramework
 
 The "Rime Framework" is an ultra-lightweight framework for Unity, designed to provide a concise interface that does not disrupt the structure of the original code, making it feel almost invisible. Currently, it features nine main modules: Consoles, Controls, States, Pools, Cycles, Animators, Scenes, Navigations, and Audios. The RimeManager is responsible for initializing these modules.
 
