@@ -21,7 +21,7 @@ Rime Framework的状态机，非常简洁易用，可以和Controls配合完成�
 
 Pools 💧
 
-Rime Framework的对象池，支持Object、Monobehaviour、GameObject的三重管理，并且能够配合Cycles实现非Mono完整的Unity周期
+Rime Framework的对象池，支持Object、Component、GameObject的三重管理，并且能够配合Cycles实现非Mono完整的Unity周期
 
 Cycles  🕙
 
@@ -65,7 +65,7 @@ The state machine of the Rime Framework, which is simple and easy to use, can wo
 
 **Pools 💧**
 
-The object pool of the Rime Framework, which supports triple management of Objects, Monobehaviour, and GameObjects, and integrates well with Cycles to achieve a complete Unity lifecycle without using Mono.
+The object pool of the Rime Framework, which supports triple management of Objects, Components, and GameObjects, and integrates well with Cycles to achieve a complete Unity lifecycle without using Mono.
 
 **Cycles 🕙**
 
