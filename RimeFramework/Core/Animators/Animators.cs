@@ -25,10 +25,7 @@ namespace RimeFramework.Core
         /// </summary>
         /// <param name="groupName">组名</param>
         /// <param name="animations">序列动画名</param>
-        public static void Register(string groupName,params string[] animations)
-        {
-            _dicGroups[groupName] = animations;
-        }
+        public static void Register(string groupName,params string[] animations) => _dicGroups[groupName] = animations;
 
         /// <summary>
         /// 播放 动画/动画组,组优先级 > 动画

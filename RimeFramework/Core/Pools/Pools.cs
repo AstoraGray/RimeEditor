@@ -10,7 +10,7 @@ namespace RimeFramework.Core
     /// <summary>
     /// 霜 · 池 💧
     /// </summary>
-    /// <b> Note: 存取所有堆类型数据，包括Mono派生类、以及提线木偶、纯GameObject
+    /// <b> Note: 存取所有堆类型数据，包括Component派生类、以及提线木偶、纯GameObject
     /// <see cref="Take<T>"/> 索取<T>类型的资源
     /// <see cref="Take(string)"/> 索取某一名称的Obj
     /// <see cref="Put<T>"/> 归放<T>类型的资源
@@ -65,10 +65,10 @@ namespace RimeFramework.Core
             
             if (queue.Count == 0)
             {
-                return TakeMono<T>(type);
+                return TakeComponent<T>(type);
             }
 
-            return TakeMono((T)queue.Dequeue(),type);
+            return TakeComponent((T)queue.Dequeue(),type);
         }
         /// <summary>
         /// 索要 - NAME
@@ -111,7 +111,7 @@ namespace RimeFramework.Core
             _dicOuterDrips[type].Remove(drip);
             queue.Enqueue(drip);
 
-            return PutMono(drip,type);
+            return PutComponent(drip,type);
         }
         /// <summary>
         /// 归放 - GAMEOBJECT
@@ -148,7 +148,7 @@ namespace RimeFramework.Core
             {
                 if (key == typeof(T) || key.IsSubclassOf(typeof(T)))
                 {
-                    ClearMono<T>(key);
+                    ClearComponent<T>(key);
                     clearCount++;
                 }
             }
@@ -177,19 +177,19 @@ namespace RimeFramework.Core
             return ClearObj(name);
         }
         /// <summary>
-        /// 索要Mono
+        /// 索要Component
         /// </summary>
         /// <param name="type">水滴类型</param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private static T TakeMono<T>(Type type) where T : class,new ()
+        private static T TakeComponent<T>(Type type) where T : class,new ()
         {
-            if (!type.IsSubclassOf(typeof(MonoBehaviour)))
+            if (!type.IsSubclassOf(typeof(Component)))
             {
                 T t = new T();
                 (t as IAwake)?.Awake();
                 (t as IStart)?.Start();
-                return TakeMono(new T(), type);
+                return TakeComponent(new T(), type);
             }
 
             bool inWares = _dicWares.ContainsKey(type);
@@ -198,8 +198,8 @@ namespace RimeFramework.Core
             if (!inWares && !haveIPools)
             {
                 GameObject obj1 = new GameObject(type.Name);
-                T mono1 =  obj1.AddComponent(type) as T;
-                return TakeMono(mono1,type);
+                T Component1 =  obj1.AddComponent(type) as T;
+                return TakeComponent(Component1,type);
             }
 
             if (!inWares && haveIPools)
@@ -213,18 +213,18 @@ namespace RimeFramework.Core
             }
 
             GameObject obj2 = Instantiate(_dicWares[type]);
-            T mono2 =  obj2.GetComponent(type) as T ?? obj2.AddComponent(type) as T;
+            T Component2 =  obj2.GetComponent(type) as T ?? obj2.AddComponent(type) as T;
             
-            return TakeMono(mono2,type);
+            return TakeComponent(Component2,type);
         }
         /// <summary>
-        /// 索要Mono
+        /// 索要Component
         /// </summary>
         /// <param name="drip">水滴实例</param>
         /// <param name="type">水滴类型</param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private static T TakeMono<T>(T drip,Type type) where T : class,new ()
+        private static T TakeComponent<T>(T drip,Type type) where T : class,new ()
         {
             if (!_dicOuterDrips.ContainsKey(type))
             {
@@ -234,8 +234,8 @@ namespace RimeFramework.Core
             HashSet<object> hashSet = _dicOuterDrips[type];
             hashSet.Add(drip);
             
-            MonoBehaviour mono = drip as MonoBehaviour;
-            if (mono == null)
+            Component Component = drip as Component;
+            if (Component == null)
             {
                 return drip;
             }
@@ -252,9 +252,9 @@ namespace RimeFramework.Core
                 _dicWells[type].transform.SetParent(_objWell.transform);
             }
 
-            mono.gameObject.name = mono.GetKey();
-            mono.transform.SetParent(_dicWells[type].transform);
-            mono.gameObject.SetActive(true);
+            Component.gameObject.name = Component.GetKey();
+            Component.transform.SetParent(_dicWells[type].transform);
+            Component.gameObject.SetActive(true);
             return drip;
         }
         /// <summary>
@@ -308,26 +308,26 @@ namespace RimeFramework.Core
         }
         
         /// <summary>
-        /// 归放Mono
+        /// 归放Component
         /// </summary>
         /// <param name="drip">水滴实例</param>
         /// <param name="type">水滴类型</param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private static bool PutMono<T>(T drip,Type type) where T : class
+        private static bool PutComponent<T>(T drip,Type type) where T : class
         {
-            MonoBehaviour mono = drip as MonoBehaviour;
-            if (mono == null)
+            Component component = drip as Component;
+            if (component == null)
             {
                 return true;
             }
 
-            if (mono.transform.parent != _dicWells[type].transform)
+            if (component.transform.parent != _dicWells[type].transform)
             {
-                mono.transform.SetParent(_dicWells[type].transform);
+                component.transform.SetParent(_dicWells[type].transform);
             }
             
-            mono.gameObject.SetActive(false);
+            component.gameObject.SetActive(false);
 
             return true;
         }
@@ -351,12 +351,12 @@ namespace RimeFramework.Core
         }
 
         /// <summary>
-        /// 清洗Mono - TYPE
+        /// 清洗Component - TYPE
         /// </summary>
         /// <param name="type">水滴类型</param>
         /// <typeparam name="T">清洗</typeparam>
         /// <returns></returns>
-        private static bool ClearMono<T>(Type type) where T : class
+        private static bool ClearComponent<T>(Type type) where T : class
         {
             Consoles.Print(typeof(Pools),$"清洗类型 {type}");
             Queue<object> queueDrips = _dicDrips[type];
@@ -364,7 +364,7 @@ namespace RimeFramework.Core
 
             foreach (var outerDrip in hashsetOuterDrips.ToList())
             {
-                PutMono(outerDrip,type);
+                PutComponent(outerDrip,type);
             }
 
             if (type.GetInterface(typeof(IOnDestroy).ToString()) != null)

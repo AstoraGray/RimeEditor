@@ -1,7 +1,7 @@
-# Rime Framework
+# Rime Framework v0.0.1
 「Rime Framework」很轻，就像雾凇上的白霜一般，覆之于上，将其包裹着的物体装饰的冰洁、神圣。
 
-「Rime Framework」是Unity的一个超轻量级框架，目的是提供简洁的接口，使用起来不会破坏原代码的结构，就像没有一样。目前目前主要有八个模块：Consoles、Controls、States、Pools、Cycles、Animators、Scenes、Navigations。RimeManager负责启动模块。
+「Rime Framework」是Unity的一个超轻量级框架，目的是提供简洁的接口，使用起来不会破坏原代码的结构，就像没有一样。目前目前主要有九个模块：Consoles、Controls、States、Pools、Cycles、Animators、Scenes、Navigations、Audios。RimeManager负责启动模块。
 
 Consoles 💻
 
@@ -37,46 +37,46 @@ Rime Framework的导航组，对游戏中的所有面板进行导航，并且有
 
 Audios 🔊
 
-即将到来，敬请期待！
+Rime Framework的音效师，管理游戏中的所有声音，并且与Pools联动
 
 ------
 
-The "Rime Framework" is lightweight, akin to the white frost on rime ice, enveloping objects in an ice-like purity and sanctity.
+The "Rime Framework" is lightweight, like the white frost on rime ice, enveloping objects and adorning them with purity and sanctity.
 
-The "Rime Framework" is an ultra-lightweight framework for Unity, designed to provide a concise interface that won't disrupt the original code structure—it's as if it's not even there. Currently, there are eight main modules: Consoles、Controls、States、Pools、Cycles、Animators、Scenes and Navigations. The RimeManager is responsible for launching these modules.
+The "Rime Framework" is an ultra-lightweight framework for Unity, designed to provide a concise interface that does not disrupt the structure of the original code, making it feel almost invisible. Currently, it features nine main modules: Consoles, Controls, States, Pools, Cycles, Animators, Scenes, Navigations, and Audios. The RimeManager is responsible for initializing these modules.
 
 **Consoles 💻**
 
-The console of the Rime Framework is responsible for printing logs from the Rime Framework, supporting the printing of instances and types.
+The console of the Rime Framework, responsible for printing out the logs of RimeFramework. It supports logging for instances and types.
 
 **Controls 🎮**
 
-The controller of the Rime Framework is developed based on the InputSystem. It uses event-driven mechanisms to control input events, supports hot-swapping of devices, long press charging, and is easily extensible and adaptable.
+The controller of the Rime Framework, developed based on the InputSystem. It uses event-driven mechanisms to manage input events, supports hot-swapping of devices, and allows for long press actions. It is also easily extensible and customizable.
 
 **States 🗡️**
 
-The state machine of the Rime Framework is very simple and easy to use, allowing collaboration with Controls to facilitate character control development. It also effectively handles state transitions and animation switches.
+The state machine of the Rime Framework, which is simple and easy to use, can work in conjunction with Controls to facilitate the development of character manipulation, and effectively handle state and animation transitions.
 
 **Pools 💧**
 
-The object pool of the Rime Framework supports threefold management of Objects, Monobehaviours, and GameObjects, and works with Cycles to achieve a complete Unity lifecycle for non-Mono classes.
+The object pool of the Rime Framework, which supports triple management of Objects, Monobehaviour, and GameObjects, and integrates well with Cycles to achieve a complete Unity lifecycle without using Mono.
 
 **Cycles 🕙**
 
-The lifecycle management of the Rime Framework, in conjunction with Pools, optimizes memory usage and allows for straightforward integration of non-Mono classes into the Unity loop.
+The lifecycle management of the Rime Framework, which optimizes memory in conjunction with Pools and makes it easy to add non-Mono classes into the Unity loop.
 
 **Animators ✍️**
 
-The animator of the Rime Framework registers animations for playback, facilitates animation blending and groups, and supports success and failure callbacks, allowing independence from Animator connections.
+The animator of the Rime Framework, which registers animations for playback, blending animations, and supports callback mechanisms for success and failure, allowing it to operate independently of Animator connections.
 
 **Scenes 🎬**
 
-The scenographer of the Rime Framework is responsible for the asynchronous loading and unloading of scenes, supporting completion callbacks and cancellation callbacks.
+The scene manager of the Rime Framework, responsible for asynchronously loading and unloading scenes, supporting completion callbacks and cancellation callbacks.
 
 **Navigations ➡️**
 
-The navigation group of the Rime Framework manages navigation for all panels in the game, featuring a loop prevention mechanism.
+The navigation group of the Rime Framework, which manages navigation for all panels in the game and includes a mechanism to prevent loops.
 
 **Audios 🔊**
 
-Coming soon, stay tuned!
+The sound engineer of the Rime Framework, which manages all audio in the game and interacts with Pools.
