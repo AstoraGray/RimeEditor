@@ -1,6 +1,7 @@
 # Rime Framework v0.0.1
-![original](https://github.com/user-attachments/assets/581aa995-2678-4c5a-90d8-cda9a440d1ba)
-
+<div style ="display:flex;" align="center">
+  <img src="https://github.com/user-attachments/assets/581aa995-2678-4c5a-90d8-cda9a440d1ba" width="512px" height="512px"/>
+</div>
 「Rime Framework」很轻，就像雾凇上的白霜一般，覆之于上，将其包裹着的物体装饰的冰洁、神圣。
 
 https://github.com/AstoraGray/Unity-RimeFramework
