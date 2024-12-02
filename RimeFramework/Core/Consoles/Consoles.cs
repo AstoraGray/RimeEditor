@@ -17,26 +17,26 @@ namespace RimeFramework.Core
     /// <remarks>Author: AstoraGray</remarks>
     public class Consoles : Singleton<Consoles>
     {
-        private static readonly Dictionary<Type, Color> _dicMapping = new()
+        private static readonly Dictionary<string, Color> _dicMapping = new()
         {
-            { typeof(RimeManager), Color.cyan },
-            { typeof(States), Color.cyan },
-            { typeof(Controls), Color.cyan },
-            { typeof(Cycles), Color.cyan },
-            { typeof(Pools), Color.cyan },
-            { typeof(Navigations),Color.cyan},
-            { typeof(Scenes), Color.cyan },
-            { typeof(Animators),Color.cyan}
+            { nameof(RimeManager), Color.cyan },
+            { nameof(States), Color.cyan },
+            { nameof(Controls), Color.cyan },
+            { nameof(Cycles), Color.cyan },
+            { nameof(Pools), Color.cyan },
+            { nameof(Navigations),Color.cyan},
+            { nameof(Scenes), Color.cyan },
+            { nameof(Animators),Color.cyan},
+            { nameof(Observers),Color.cyan}
         };
         
-        public static void Print(Type type,string content)
+        public static void Print(string name,string content)
         {
-            string typeName = type.Name;
-            if (_dicMapping.ContainsKey(type))
+            if (_dicMapping.ContainsKey(name))
             {
-                typeName = $"<color={_dicMapping[type].ToHex()}>{typeName}</color>";
+                name = $"<color={_dicMapping[name].ToHex()}>{name}</color>";
             }
-            Debug.Log($"{typeName}: {content}");
+            Debug.Log($"{name}: {content}");
         }
 
         public static void Print(Object obj, string content)

@@ -60,7 +60,7 @@ namespace RimeFramework.Core
             if (group?.Name == panel.Group)
             {
                 group.Open(panel);
-                Consoles.Print(typeof(Navigations),$"打开面板{group.DebugPanels()}，当前导航组为{DebugGroups()}");
+                Consoles.Print(nameof(Navigations),$"打开面板{group.DebugPanels()}，当前导航组为{DebugGroups()}");
                 return panel;
             }
             
@@ -86,7 +86,7 @@ namespace RimeFramework.Core
             _groups.Add(group);
 
             group.Open(panel);
-            Consoles.Print(typeof(Navigations),$"打开面板{group.DebugPanels()}，当前导航组为{DebugGroups()}");
+            Consoles.Print(nameof(Navigations),$"打开面板{group.DebugPanels()}，当前导航组为{DebugGroups()}");
             return panel;
         }
         /// <summary>
@@ -98,7 +98,7 @@ namespace RimeFramework.Core
             PanelGroup group = _groups.LastOrDefault();
             if (group == null)
             {
-                Consoles.Print(typeof(Navigations),$"当前无导航组，无法返回");
+                Consoles.Print(nameof(Navigations),$"当前无导航组，无法返回");
                 return null;
             }
 
@@ -112,12 +112,12 @@ namespace RimeFramework.Core
                 panel = group?.Open();
                 if (panel == null)
                 {
-                    Consoles.Print(typeof(Navigations),$"当前已无面板");
+                    Consoles.Print(nameof(Navigations),$"当前已无面板");
                     return panel;
                 }
             }
 
-            Consoles.Print(typeof(Navigations),$"打开面板{group?.DebugPanels()}，当前导航组为{DebugGroups()}");
+            Consoles.Print(nameof(Navigations),$"打开面板{group?.DebugPanels()}，当前导航组为{DebugGroups()}");
 
             return panel;
         }
@@ -127,7 +127,7 @@ namespace RimeFramework.Core
             Pools.Clear<Panel>();
             _groups.Clear();
             _dicPanels.Clear();
-            Consoles.Print(typeof(Navigations),$"销毁所有面板");
+            Consoles.Print(nameof(Navigations),$"销毁所有面板");
         }
         /// <summary>
         /// 输出导航组Debug信息

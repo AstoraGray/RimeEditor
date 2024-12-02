@@ -95,7 +95,7 @@ namespace RimeFramework.Core
                 clip = Resources.Load<AudioClip>(path);
                 if (clip == null)
                 {
-                    Consoles.Print(typeof(Audios),$"找不到音频文件{path}");
+                    Consoles.Print(nameof(Audios),$"找不到音频文件{path}");
                     return;
                 }
                 _dicClips[name] = clip;
@@ -117,7 +117,7 @@ namespace RimeFramework.Core
                 case AudioType.S3D:
                     if (own == null)
                     {
-                        Consoles.Print(typeof(Audios),$"播放{name}声音失败，3D声音需要指定一个拥有者");
+                        Consoles.Print(nameof(Audios),$"播放{name}声音失败，3D声音需要指定一个拥有者");
                         return;
                     }
                     audio = Pools.Take<AudioSource>();
@@ -145,18 +145,18 @@ namespace RimeFramework.Core
                     
                     if (_audioMusic.isPlaying)
                     {
-                        Consoles.Print(typeof(Audios),$"开始淡出BGM {_audioMusic.name}");
+                        Consoles.Print(nameof(Audios),$"开始淡出BGM {_audioMusic.name}");
                         _coroutineMusicFade = Instance.StartCoroutine(FadeMusic(_audioMusic.volume,0,FADE_TIME,FadeType.Out, () =>
                         {
                             _audioMusic.clip = clip;
-                            Consoles.Print(typeof(Audios),$"开始淡入BGM {name}");
+                            Consoles.Print(nameof(Audios),$"开始淡入BGM {name}");
                             _coroutineMusicFade = Instance.StartCoroutine(FadeMusic(_audioMusic.volume,musicVolume,FADE_TIME,FadeType.In));
                         }));
                     }
                     else
                     {
                         _audioMusic.clip = clip;
-                        Consoles.Print(typeof(Audios),$"开始淡入BGM {name}");
+                        Consoles.Print(nameof(Audios),$"开始淡入BGM {name}");
                         _coroutineMusicFade = Instance.StartCoroutine(FadeMusic(_audioMusic.volume,musicVolume,FADE_TIME,FadeType.In));
                     }
                     break;

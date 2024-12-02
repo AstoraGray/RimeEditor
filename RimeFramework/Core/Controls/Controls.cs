@@ -78,7 +78,7 @@ namespace RimeFramework.Core
         {
             if (CurrentControlScheme == newControlScheme) return;
 
-            Consoles.Print(typeof(Controls),"[Input] 输入设备切换 [FROM: " + CurrentControlScheme + "] [TO: " + newControlScheme +
+            Consoles.Print(nameof(Controls),"[Input] 输入设备切换 [FROM: " + CurrentControlScheme + "] [TO: " + newControlScheme +
                                        "]");
 
             CurrentControlScheme = newControlScheme;
@@ -116,7 +116,7 @@ namespace RimeFramework.Core
             InputAction action = Bindings.FindAction(behaviour.binding.name);
             if (action == null)
             {
-                Consoles.Print(typeof(Controls),"找不到状态，是退出播放模式了吗?");
+                Consoles.Print(nameof(Controls),"找不到状态，是退出播放模式了吗?");
                 return;
             }
             action.performed -= behaviour.Invoke;

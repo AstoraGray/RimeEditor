@@ -44,6 +44,10 @@ Audios 🔊
 
 Rime Framework的音效师，管理游戏中的所有声音，并且与Pools联动
 
+Obsersers 📷
+
+Rime Framework的观察者，管理游戏中的有参无参事件，并且有协同的ObsValue观察值
+
 ------
 
 The "Rime Framework" is lightweight, like the white frost on rime ice, enveloping objects and adorning them with purity and sanctity.
@@ -87,3 +91,7 @@ The navigation group of the Rime Framework, which manages navigation for all pan
 **Audios 🔊**
 
 The sound engineer of the Rime Framework, which manages all audio in the game and interacts with Pools.
+
+Obsersers 📷
+
+The observers of the Rime Framework manage both parameterized and non-parameterized events in the game, and have collaborative ObsValue observation values.

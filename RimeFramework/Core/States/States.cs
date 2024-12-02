@@ -26,7 +26,7 @@ namespace RimeFramework.Core
                 {
                     return states;
                 }
-                Consoles.Print(typeof(States),"状态不存在");
+                Consoles.Print(nameof(States),"状态不存在");
                 return null; // 或者抛出异常，根据需求
             }
         }
@@ -80,7 +80,7 @@ namespace RimeFramework.Core
         {
             if (state == null)
             {
-                Consoles.Print(typeof(States),"注销目标不存在");
+                Consoles.Print(nameof(States),"注销目标不存在");
                 return;
             }
             _dicStates[state.own].Remove(state.GetType());

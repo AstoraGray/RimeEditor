@@ -102,7 +102,7 @@ namespace RimeFramework.Core
             Type type = typeof(T);
             if (!_dicDrips.ContainsKey(type))
             {
-                Consoles.Print(typeof(Pools),$"归放过程未发现池 {type}");
+                Consoles.Print(nameof(Pools),$"归放过程未发现池 {type}");
                 return false;
             }
             
@@ -123,7 +123,7 @@ namespace RimeFramework.Core
             string name = obj.name.Extract(RIME);
             if (!_dicObjDrips.ContainsKey(name))
             {
-                Consoles.Print(typeof(Pools),$"归放过程未发现池 {name}");
+                Consoles.Print(nameof(Pools),$"归放过程未发现池 {name}");
                 return false;
             }
             
@@ -157,7 +157,7 @@ namespace RimeFramework.Core
             {
                 return true;
             }
-            Consoles.Print(typeof(Pools),$"清洗过程在{WELL}未发现池 {type}");
+            Consoles.Print(nameof(Pools),$"清洗过程在{WELL}未发现池 {type}");
             return false;
         }
         
@@ -170,7 +170,7 @@ namespace RimeFramework.Core
         {
             if (!_dicObjDrips.ContainsKey(name))
             {
-                Consoles.Print(typeof(Pools),$"清洗过程在{OBJ_WELL}中未发现池 {name}");
+                Consoles.Print(nameof(Pools),$"清洗过程在{OBJ_WELL}中未发现池 {name}");
                 return false;
             }
 
@@ -207,7 +207,7 @@ namespace RimeFramework.Core
                 _dicWares[type] = Resources.Load<GameObject>($"Prefabs/{WELL}/{type.Name}");
                 if (_dicWares[type] == null)
                 {
-                    Consoles.Print(typeof(Pools),$"Prefabs/{WELL}中未发现预制体{type.Name}");
+                    Consoles.Print(nameof(Pools),$"Prefabs/{WELL}中未发现预制体{type.Name}");
                     return null;
                 }
             }
@@ -267,7 +267,7 @@ namespace RimeFramework.Core
             _dicObjWares[name] = Resources.Load<GameObject>($"Prefabs/{OBJ_WELL}/{name}");
             if (_dicObjWares[name] == null)
             {
-                Consoles.Print(typeof(Pools),$"Prefabs/{OBJ_WELL}中未发现预制体{name}");
+                Consoles.Print(nameof(Pools),$"Prefabs/{OBJ_WELL}中未发现预制体{name}");
                 return null;
             }
             GameObject obj = Instantiate(_dicObjWares[name]);
@@ -358,7 +358,7 @@ namespace RimeFramework.Core
         /// <returns></returns>
         private static bool ClearComponent<T>(Type type) where T : class
         {
-            Consoles.Print(typeof(Pools),$"清洗类型 {type}");
+            Consoles.Print(nameof(Pools),$"清洗类型 {type}");
             Queue<object> queueDrips = _dicDrips[type];
             HashSet<object> hashsetOuterDrips = _dicOuterDrips[type];
 
@@ -395,7 +395,7 @@ namespace RimeFramework.Core
         /// <returns></returns>
         private static bool ClearObj(string name)
         {
-            Consoles.Print(typeof(Pools),$"清洗GameObject {name}");
+            Consoles.Print(nameof(Pools),$"清洗GameObject {name}");
             HashSet<GameObject> hashsetOuterDrips = _dicObjOuterDrips[name];
             
             foreach (var outerObjDrip in hashsetOuterDrips.ToList())

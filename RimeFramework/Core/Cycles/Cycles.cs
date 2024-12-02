@@ -64,7 +64,7 @@ namespace RimeFramework.Core
         {
             if (own as MonoBehaviour != null)
             {
-                Consoles.Print(typeof(Cycles),$"不允许Mono派生类加入周期");
+                Consoles.Print(nameof(Cycles),$"不允许Mono派生类加入周期");
                 return null;
             }
 
@@ -126,7 +126,7 @@ namespace RimeFramework.Core
         {
             if (own == null)
             {
-                Consoles.Print(typeof(Cycles),$"注销物体为空");
+                Consoles.Print(nameof(Cycles),$"注销物体为空");
                 return false;
             }
 
